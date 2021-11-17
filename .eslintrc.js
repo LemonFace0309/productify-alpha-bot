@@ -7,7 +7,12 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2021,
   },
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
   rules: {
     'prettier/prettier': [
       'error',
