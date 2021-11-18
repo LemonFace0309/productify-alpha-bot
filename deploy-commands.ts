@@ -1,14 +1,19 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import dotenv from 'dotenv';
+import fs from 'fs';
 dotenv.config();
 
-const commands = [
-  new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
-  new SlashCommandBuilder().setName('server').setDescription('Replies with server info!'),
-  new SlashCommandBuilder().setName('user').setDescription('Replies with user info!'),
-].map((command) => command.toJSON());
+const commands:any = [];
+const commandFiles = fs.readdirSync('./commands').filter((file) => /^.+(\.ts|\.js)$/.test(file));
+
+/**
+ * Adding commands to be deployed
+ */
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  commands.push(command.data.toJSON());
+}
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN!);
 
