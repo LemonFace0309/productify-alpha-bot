@@ -5,7 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tdsc -w --skipLibCheck",
+    "tsc": "tsc -w --skipLibCheck",
+    "deployCommands": "ts-node deploy-commands.ts",
     "dev": "nodemon index.ts"
   },
   "author": "",

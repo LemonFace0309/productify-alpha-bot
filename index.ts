@@ -49,7 +49,7 @@ client.on('interactionCreate', async (interaction) => {
 
   switch (commandName) {
     case 'ping':
-      interaction.reply({
+      await interaction.reply({
         content: 'pong',
         ephemeral: true,
       });
@@ -64,9 +64,24 @@ client.on('interactionCreate', async (interaction) => {
 
       await new Promise((resolve) => setTimeout(resolve, 3000));
 
-      interaction.editReply({
+      await interaction.editReply({
         content: `This sum is ${num1 + num2}`,
       });
+      break;
+    case 'server':
+      await interaction.reply({
+        content: `Server name: ${interaction!.guild!.name}\nTotal members: ${
+          interaction!.guild!.memberCount
+        }\nCreated at: ${interaction!.guild!.createdAt}\nVerification level: ${interaction!.guild!.verificationLevel}`,
+        ephemeral: true,
+      });
+      break;
+    case 'user':
+      await interaction.reply({
+        content: `Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`,
+        ephemeral: true,
+      });
+      break;
   }
 });
 
